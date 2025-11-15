@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Card - Skyblue</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #a2d8ff, #74b9ff);
+  }
+  .card-container {
+    perspective: 1200px;
+    width: 5.5cm;
+    height: 8.5cm;
+    margin-bottom: 10px;
+  }
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+    cursor: pointer;
+  }
+  .card.flip { transform: rotateY(180deg); }
+  .card-side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom right, #ffffff, #d0ebff);
+    border: 2px solid #74b9ff;
+    font-size: 0.8em;
+  }
+  .card-front img.photo {
+    width: 3cm;
+    height: 4cm;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 5px;
+    border: 2px solid #74b9ff;
+  }
+  .card-front img.logo {
+    width: 1.2cm;
+    height: 1.2cm;
+    margin-bottom: 3px;
+  }
+  .school-name {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85em;
+    margin-bottom: 2px;
+  }
+  .school-faculty {
+    text-align: center;
+    font-size: 0.7em;
+    margin-bottom: 5px;
+  }
+  .card-front #student-info { text-align:center; font-size:0.75em; line-height:1.2; margin-bottom: 10px; }
+  .card-front #student-info p { margin:2px 0; }
+  .academic-year {
+    margin-top: auto;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.75em;
+    color: #333;
+  }
+  .card-back {
+    transform: rotateY(180deg);
+    text-align:center;
+    color:#333;
+    font-size:0.75em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-back h3 { margin-bottom:5px; font-weight:600; font-size:0.8em; }
+  .card-back #qrcode { background:white; padding:5px; border-radius:5px; border:1px solid #74b9ff; margin-bottom:5px; }
+  .btn {
+    padding: 6px 12px;
+    background: #ffffff;
+    color: #74b9ff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.2s, color 0.2s;
+    margin: 5px;
+    font-size:0.8em;
+  }
+  .btn:hover { background: #74b9ff; color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="card-container">
+  <div class="card" id="student-card">
+    <!-- Front -->
+    <div class="card-side card-front" id="front-card">
+      <img class="logo" src="data:image/png;base64,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" alt="School Logo">
+      <div class="school-name">Polytechnic University (Maubin)</div>
+      <div class="school-faculty">Faculty of Computing</div>
+      <img class="photo" id="card-photo" src="" alt="Student Photo"/>
+      <div id="student-info">
+        <p id="card-name"></p>
+        <p id="card-roll"></p>
+        <p id="card-year"></p>
+        <p id="card-major"></p>
+      </div>
+      <div class="academic-year">2024-2025 Academic Year</div>
+    </div>
+    <!-- Back -->
+    <div class="card-side card-back" id="back-card">
+      <h3>Student QR Code</h3>
+      <div id="qrcode"></div>
+      <p>Scan for details</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <button class="btn" onclick="downloadImages()">Download Images</button>
+  <button class="btn" onclick="downloadPDF()">Download PDF</button>
+  <button class="btn" onclick="sendEmail()">Send with Email</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const studentData = {
+  photo: 'data:image/png;base64,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',
+  name: 'Paing Wai Yan Khant',
+  roll: 'MUB-1569',
+  major: 'Computer Science',
+  year: 'Fourth Year'
+};
+
+// Fill front
+document.getElementById('card-photo').src = studentData.photo;
+document.getElementById('card-name').innerText = studentData.name;
+document.getElementById('card-roll').innerText = studentData.roll;
+document.getElementById('card-year').innerText = studentData.year;
+document.getElementById('card-major').innerText = studentData.major;
+
+// QR code
+new QRCode(document.getElementById('qrcode'), {
+  text: `${studentData.name} - ${studentData.roll}`,
+  width: 80,
+  height: 80
+});
+
+// Flip card
+const card = document.getElementById('student-card');
+card.addEventListener('click', () => card.classList.toggle('flip'));
+
+// Download Images
+async function downloadImages() {
+  const card = document.getElementById('student-card');
+  card.classList.remove('flip');
+  await new Promise(r => setTimeout(r, 100));
+
+  const frontCanvas = await html2canvas(document.getElementById('front-card'), { scale: 3 });
+  const frontLink = document.createElement('a');
+  frontLink.href = frontCanvas.toDataURL('image/png');
+  frontLink.download = 'front.png';
+  frontLink.click();
+
+  const backCard = document.getElementById('back-card');
+  const originalTransform = backCard.style.transform;
+  backCard.style.transform = 'none'; // remove rotation temporarily
+  const backCanvas = await html2canvas(backCard, { scale: 3 });
+  backCard.style.transform = originalTransform;
+  const backLink = document.createElement('a');
+  backLink.href = backCanvas.toDataURL('image/png');
+  backLink.download = 'back.png';
+  backLink.click();
+}
+
+// Download PDF
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const pdfWidth = 5.5;
+  const pdfHeight = 8.5;
+  const pdf = new jsPDF({
+    orientation: 'portrait',
+    unit: 'cm',
+    format: [pdfWidth, pdfHeight]
+  });
+
+  const card = document.getElementById('student-card');
+  card.classList.remove('flip');
+  await new Promise(r => setTimeout(r, 100));
+
+  const frontCanvas = await html2canvas(document.getElementById('front-card'), { scale: 3 });
+  const frontImg = frontCanvas.toDataURL('image/png');
+
+  const backCard = document.getElementById('back-card');
+  const originalTransform = backCard.style.transform;
+  backCard.style.transform = 'none'; // remove rotation temporarily
+  const backCanvas = await html2canvas(backCard, { scale: 3 });
+  backCard.style.transform = originalTransform;
+  const backImg = backCanvas.toDataURL('image/png');
+
+  pdf.addImage(frontImg, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  pdf.addPage();
+  pdf.addImage(backImg, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  pdf.save('student_card.pdf');
+}
+
+// Email button
+async function sendEmail() {
+  await downloadImages();
+  alert('Please attach front.png and back.png from your downloads to your email client.');
+  window.location.href = "mailto:?subject=Student Card&body=Attached are the student card images.";
+}
+</script>
+
+</body>
+</html>

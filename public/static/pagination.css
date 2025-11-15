@@ -1,0 +1,42 @@
+
+    /* Fix background of Laravel Tailwind pagination wrapper */
+    nav[role="navigation"] .hidden.sm\:flex-1 {
+        background-color: white !important;
+    }
+
+    /* Pagination links */
+    nav[role="navigation"] a,
+    nav[role="navigation"] span {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid #ddd !important;
+        padding: 6px 12px;
+        margin: 0 2px;
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out; /* smooth hover */
+    }
+
+    /* Hover effect */
+    nav[role="navigation"] a:hover {
+        background-color: #007bff !important; /* blue */
+        color: white !important;
+        transform: scale(1.08); /* slight zoom */
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Active (current page) */
+    nav[role="navigation"] .bg-blue-500 {
+        background-color: #007bff !important;
+        color: white !important;
+        font-weight: bold;
+        transform: scale(1.1);
+        box-shadow: 0px 4px 10px rgba(0,123,255,0.3);
+    }
+
+    /* Disabled */
+    nav[role="navigation"] .opacity-50 {
+        background-color: #f5f5f5 !important;
+        color: #aaa !important;
+        border: 1px solid #ddd !important;
+        cursor: not-allowed;
+    }

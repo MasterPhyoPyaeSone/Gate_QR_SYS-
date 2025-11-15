@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .profile-card {
+            max-width: 800px;
+            transition: all 0.3s ease;
+        }
+        .profile-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background: white;
+            padding: 8px;
+        }
+        .detail-item {
+            transition: all 0.2s ease;
+        }
+        .detail-item:hover {
+            background-color: rgba(249, 250, 251, 0.8);
+        }
+        .edit-btn {
+            transition: all 0.2s ease;
+        }
+        .edit-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <div class="profile-card bg-white rounded-xl shadow-md overflow-hidden w-full">
+        <!-- Profile Header -->
+        <div class="bg-blue-600 p-6 text-white relative">
+            <div class="absolute top-4 right-4 flex space-x-2">
+                <button class="edit-btn bg-white text-blue-600 p-2 rounded-full shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                <div class="relative">
+                    <img src="https://placehold.co/500x500?text=Profile+Photo" alt="Student profile photo showing a smiling young adult with short brown hair wearing casual attire" class="profile-image rounded-full">
+                    <span class="absolute bottom-2 right-2 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></span>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <h1 class="text-2xl font-bold" id="username">Alex Johnson</h1>
+                    <p class="text-blue-100" id="roll-number">Roll No: CS2021150</p>
+                    <div class="mt-2 flex flex-wrap justify-center md:justify-start gap-2">
+                        <span class="bg-blue-700 px-3 py-1 rounded-full text-xs font-medium" id="major">Computer Science</span>
+                        <span class="bg-blue-500 px-3 py-1 rounded-full text-xs font-medium" id="year">Sophomore</span>
+                        <span class="bg-blue-400 px-3 py-1 rounded-full text-xs font-medium" id="gender">Male</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-2 shadow-md hidden md:block">
+                    <img src="https://placehold.co/500x500?text=QR+Code" alt="QR Code for student ID verification" class="qr-code rounded">
+                    <p class="text-xs text-center mt-1 text-gray-600 font-medium">Student ID</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Contact Information -->
+            <div class="space-y-3">
+                <h2 class="text-lg font-semibold text-gray-700 border-b pb-2">Contact Information</h2>
+                <div class="detail-item bg-gray-50 p-4 rounded-lg flex items-center gap-3">
+                    <div class="bg-blue-100 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Phone Number</p>
+                        <p class="font-medium" id="phone-no">+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                <div class="detail-item bg-gray-50 p-4 rounded-lg flex items-center gap-3">
+                    <div class="bg-purple-100 p-2 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Email Address</p>
+                        <p class="font-medium" id="email">alex.johnson@university.edu</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Information -->
+            <div class="space-y-3">
+                <h2 class="text-lg font-semibold text-gray-700 border-b pb-2">Academic Details</h2>
+                <div class="detail-item bg-gray-50 p-4 rounded-lg">
+                    <p class="text-xs text-gray-500">Major</p>
+                    <p class="font-medium" id="major-detailed">Bachelor of Science in Computer Science</p>
+                </div>
+                <div class="detail-item bg-gray-50 p-4 rounded-lg">
+                    <p class="text-xs text-gray-500">Current Year</p>
+                    <p class="font-medium" id="year-detailed">Second Year (Sophomore)</p>
+                </div>
+            </div>
+
+            <!-- Meta Information -->
+            <div class="md:col-span-2 space-y-3 pt-4 border-t">
+                <h2 class="text-lg font-semibold text-gray-700 border-b pb-2">Account Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="detail-item bg-gray-50 p-4 rounded-lg">
+                        <p class="text-xs text-gray-500">Account Created</p>
+                        <p class="font-medium" id="created-at">January 15, 2023</p>
+                    </div>
+                    <div class="detail-item bg-gray-50 p-4 rounded-lg">
+                        <p class="text-xs text-gray-500">Last Updated</p>
+                        <p class="font-medium" id="updated-at">October 1, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // In a real application, this data would come from an API
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mock user data
+            const userData = {
+                username: "Alex Johnson",
+                roll_number: "CS2021150",
+                major: "Computer Science",
+                year: "Sophomore",
+                gender: "Male",
+                phone_no: "+1 (555) 123-4567",
+                email: "alex.johnson@university.edu",
+                created_at: "January 15, 2023",
+                updated_at: "October 1, 2023"
+            };
+
+            // Update all fields with the user data
+            Object.keys(userData).forEach(key => {
+                const element = document.getElementById(key.replace('_', '-'));
+                if (element) {
+                    element.textContent = userData[key];
+                }
+                
+                // Special case for major and year (duplicate fields)
+                if (key === 'major') {
+                    document.getElementById('major-detailed').textContent = `Bachelor of Science in ${userData[key]}`;
+                } else if (key === 'year') {
+                    const yearTextMap = {
+                        'Freshman': 'First Year',
+                        'Sophomore': 'Second Year',
+                        'Junior': 'Third Year',
+                        'Senior': 'Fourth Year'
+                    };
+                    document.getElementById('year-detailed').textContent = `${yearTextMap[userData[key]]} (${userData[key]})`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
