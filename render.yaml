@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: gate-qr-system
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    region: singapore
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        value: base64:EqKU2B02LBjgYYTxEmbSrRy2u2iEiCxshrZR1+v31k4=
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase: true
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        fromDatabase: true
+      - key: DB_USERNAME
+        fromDatabase: true
+      - key: DB_PASSWORD
+        fromDatabase: true
+
+databases:
+  - name: gateqr-db
+    plan: free
+    region: singapore
