@@ -3,29 +3,32 @@ services:
     name: gate-qr-system
     env: docker
     plan: free
-    dockerfilePath: ./Dockerfile
     region: singapore
+    dockerfilePath: ./Dockerfile
+
     envVars:
       - key: APP_ENV
         value: production
-      - key: APP_DEBUG
-        value: false
+
       - key: APP_KEY
-        value: base64:EqKU2B02LBjgYYTxEmbSrRy2u2iEiCxshrZR1+v31k4=
+        sync: false
+
       - key: DB_CONNECTION
-        value: pgsql
+        value: mysql
       - key: DB_HOST
-        fromDatabase: true
+        fromService: gateqr-db
       - key: DB_PORT
-        value: 5432
+        value: 3306
       - key: DB_DATABASE
-        fromDatabase: true
+        value: QR_SCANNER_SYSTEM
       - key: DB_USERNAME
-        fromDatabase: true
+        value: root
       - key: DB_PASSWORD
-        fromDatabase: true
+        sync: false
 
 databases:
   - name: gateqr-db
     plan: free
     region: singapore
+    databaseName: QR_SCANNER_SYSTEM
+    user: root
